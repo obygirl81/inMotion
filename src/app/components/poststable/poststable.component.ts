@@ -11,22 +11,23 @@ import { Posts } from '../../models/posts.model';
   styleUrls: ['./poststable.component.css']
 })
 export class PoststableComponent implements OnInit {
-  dataSource = new PostsDataSource(this.postsService);
+  //dataSource = new PostsDataSource(this.postsService);
+  dataSource = [];
   displayedColumns = ['id', 'slug', 'status', 'title', 'date'];
   
   constructor(private  postsService: PostsService) { }
 
   ngOnInit(): void {
+    this.postsService.getPosts(1).subscribe(
+      (res) => {
+        this.dataSource = res;
+        this.postsService.getPosts(2).subscribe(
+          (res) => {
+            this.dataSource = this.dataSource.concat(res)
+          }
+        )
+      }
+    )
+    
   }
-
-}
-
-export class PostsDataSource extends DataSource<any> {
-  constructor(private postsService: PostsService) {
-    super();
-  }
-  connect(): Observable<Posts[]> {
-    return this.postsService.getPosts(1);
-  }
-  disconnect() {}
 }
