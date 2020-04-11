@@ -7,10 +7,10 @@ import { Posts } from '../models/posts.model';
 @Injectable()
 export class PostsService {
 
-  private serviceUrl = 'https://wordpress.org/news/wp-json/wp/v2/posts';
+  private serviceUrl = 'https://wordpress.org/news/wp-json/wp/v2/posts?order=desc&page=';
 
   constructor(private http: HttpClient) { }
-  getPosts(): Observable<Posts[]> {
-    return this.http.get<Posts[]>(this.serviceUrl);
+  getPosts(page): Observable<Posts[]> {
+    return this.http.get<Posts[]>(`${this.serviceUrl}${page}`).pipe(res =>res);
   }
 }

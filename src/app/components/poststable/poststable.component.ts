@@ -17,7 +17,10 @@ export class PoststableComponent implements OnInit {
   constructor(private  postsService: PostsService) { }
 
   ngOnInit(): void {
-    this.postable = this.postsService.getPosts();
+    this.postable = this.postsService.getPosts(1);
+  }
+  logData(data){
+    console.log(data)
   }
 
 }
@@ -27,11 +30,7 @@ export class PostsDataSource extends DataSource<any> {
     super();
   }
   connect(): Observable<Posts[]> {
-    return this.postsService.getPosts();
+    return this.postsService.getPosts(1);
   }
   disconnect() {}
-}
-
-function logData(row) {
-  console.log(row);
 }
