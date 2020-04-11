@@ -1,0 +1,37 @@
+import { Component, OnInit } from '@angular/core';
+import { PostsService } from '../../services/posts.service';
+import { Observable } from 'rxjs/Observable';
+import { DataSource } from '@angular/cdk/collections';
+import { Posts } from '../../models/posts.model';
+
+
+@Component({
+  selector: 'poststable',
+  templateUrl: './poststable.component.html',
+  styleUrls: ['./poststable.component.css']
+})
+export class PoststableComponent implements OnInit {
+  dataSource = new PostsDataSource(this.postsService);
+  displayedColumns = ['id', 'slug', 'status', 'title', 'date'];
+  
+  constructor(private  postsService: PostsService) { }
+
+  ngOnInit(): void {
+    this.postable = this.postsService.getPosts();
+  }
+
+}
+
+export class PostsDataSource extends DataSource<any> {
+  constructor(private postsService: PostsService) {
+    super();
+  }
+  connect(): Observable<Posts[]> {
+    return this.postsService.getPosts();
+  }
+  disconnect() {}
+}
+
+function logData(row) {
+  console.log(row);
+}
