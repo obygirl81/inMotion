@@ -17,7 +17,6 @@ export class PoststableComponent implements OnInit {
   constructor(private  postsService: PostsService) { }
 
   ngOnInit(): void {
-    this.postable = this.postsService.getPosts(1);
   }
   logData(data){
     console.log(data)

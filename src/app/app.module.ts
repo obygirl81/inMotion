@@ -10,13 +10,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { PostsService } from './services/posts.service';
 import { HomeComponent } from './home/home.component';
 import { PostsListComponent } from './posts-list/posts-list.component';
+import { PostDetailsComponent } from './components/post-details/post-details.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PoststableComponent,
     HomeComponent,
-    PostsListComponent
+    PostsListComponent,
+    PostDetailsComponent
   ],
   imports: [
     BrowserModule,
