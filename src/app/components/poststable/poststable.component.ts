@@ -18,9 +18,6 @@ export class PoststableComponent implements OnInit {
 
   ngOnInit(): void {
   }
-  logData(data){
-    console.log(data)
-  }
 
 }
 
